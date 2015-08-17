@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, :only => [:edit, :update]
+
   #signup page
   def new
   	@user = User.new
@@ -15,6 +17,26 @@ class UsersController < ApplicationController
   	end
   end
 
+  #edit
+  def edit
+  	@user = @current_user
+  end
+
+  #update
+  def update
+  	if @current_user.update(user_params)
+  		flash[:success] = "Succeed to update profile!"
+  		redirect_to user_path(@current_user)
+	else
+        render 'edit'
+	end
+  end
+
+  #subregion
+  def subregion_options
+  	render :partial => 'subregion_select'
+  end
+
   #show
   def show
   	@user = User.find(params[:id])
@@ -23,6 +45,6 @@ class UsersController < ApplicationController
   #avoid xss
   private
   def user_params
-  	params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  	params.require(:user).permit(:name, :email, :country_code, :state_code, :password, :password_confirmation)
   end
 end
