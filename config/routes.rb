@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root :to => 'static_pages#home'
 
-  get '/users/subregion_options' => 'users#subregion_options'
+  get 'users/subregion_options' => 'users#subregion_options'
   get 'signup', :to => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
