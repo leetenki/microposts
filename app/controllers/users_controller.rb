@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   #show
   def show
   	@user = User.find(params[:id])
+  	@microposts = @user.microposts
   end
 
   #avoid xss
