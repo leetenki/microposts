@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :microposts
 	before_save { self.email = email.downcase }
 
 	validates :name, :presence => true, :length => { :maximum => 50 }
@@ -10,6 +11,8 @@ class User < ActiveRecord::Base
 			  :uniqueness => { :case_sensitive => false }
 	validates :country_code, :presence => true, :inclusion => { :in => Carmen::Country.all.map(&:code) }
 	validate :check_state_code
+	has_secure_password
+
 
 	private
 	def check_state_code
@@ -25,6 +28,4 @@ class User < ActiveRecord::Base
 			end
 		end
 	end
-
-	has_secure_password
 end
