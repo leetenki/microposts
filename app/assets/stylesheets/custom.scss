@@ -144,6 +144,44 @@ aside {
 }
 
 
+/* followings */
+.users {
+  padding: 0;
+  .panel {
+    padding: 5px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+  }
+  .user {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    height: 240px;
+    overflow: hidden;
+    background-color: #fafafa;
+  }
+  .gravatar {
+    float: left;
+    margin: 5px;
+    border-radius: 6px;
+  }
+  .user_name {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .profile {
+    display: block;
+    position:absolute;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 50px;
+  }
+}
+
+
 
 /* microposts */
 

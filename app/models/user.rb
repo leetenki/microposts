@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	has_many :following_relationships, :class_name => "Relationship", :foreign_key => :follower_id, :dependent => :destroy
 	has_many :following_users, :through => :following_relationships, :source => :followed
 	has_many :follower_relationships, :class_name => "Relationship", :foreign_key => :followed_id, :dependent => :destroy
-	has_many :follower_users, :through => :follower_relationships, :source => :follwer
+	has_many :follower_users, :through => :follower_relationships, :source => :follower
 
 	before_save { self.email = email.downcase }
 
@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 			  :format => { :with => VALID_EMAIL_REGEX },
 			  :uniqueness => { :case_sensitive => false }
 	validates :country_code, :presence => true, :inclusion => { :in => Carmen::Country.all.map(&:code) }
+	validates :profile, :length => { :maximum => 150 }
 	validate :check_state_code
 	has_secure_password
 

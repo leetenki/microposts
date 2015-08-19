@@ -10,13 +10,7 @@
 
 			<%= f.label :email %>
 			<%= f.text_field :email, :class => "form-control" %>
-
-			<%= f.label :country_code %>
-			<%= f.country_select :country_code, :prompt => "Please select a country" %>
-
-			<%= f.label :state_code %>
-			<%= render :partial => 'subregion_select', :locals => { :parent_region => f.object.country_code } %>
-
+	
 			<%= f.label :password %>
 			<%= f.password_field :password, :class => "form-control" %>
 

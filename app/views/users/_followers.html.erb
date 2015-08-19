@@ -1,0 +1,13 @@
+<h3>Followers (<%= @follower_users.count %>)</h3>
+
+<div class="users">
+	<% @follower_users.each do |user| %>
+		<div class="col-md-4 col-sm-4 col-xs-4 panel">
+			<div id="user-<%= user.id %>" class="user">
+				<%= link_to gravatar_for(user, :size => 50), user %>
+				<span class="user_name"><%= link_to user.name, user %></span>
+				<span class="profile"><%= user.profile %></span>
+			</div>
+		</div>
+	<% end %>
+</div>

@@ -1,5 +1,22 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, :only => [:edit, :update]
+  before_action :logged_in_user, :only => [:edit, :update, :followings, :followers, :tweets]
+
+	#render following page
+	def followings
+		@following_users = User.find(params[:id]).following_users
+	end
+
+	#render followers page
+	def followers
+		@follower_users = User.find(params[:id]).follower_users
+	end
+
+	#render tweets page
+	def tweets
+  	@user = User.find(params[:id])
+  	@microposts = @user.microposts
+	end
+
 
   #signup page
   def new
@@ -19,7 +36,7 @@ class UsersController < ApplicationController
 
   #edit
   def edit
-  	@user = @current_user
+  	@user = current_user
   end
 
   #update
@@ -27,9 +44,10 @@ class UsersController < ApplicationController
   	if @current_user.update(user_params)
   		flash[:success] = "Succeed to update profile!"
   		redirect_to user_path(@current_user)
-	else
-        render 'edit'
-	end
+		else
+			@user = current_user
+	    render 'edit'
+		end
   end
 
   #subregion
@@ -46,6 +64,6 @@ class UsersController < ApplicationController
   #avoid xss
   private
   def user_params
-  	params.require(:user).permit(:name, :email, :country_code, :state_code, :password, :password_confirmation)
+  	params.require(:user).permit(:name, :email, :country_code, :state_code, :profile, :password, :password_confirmation)
   end
 end

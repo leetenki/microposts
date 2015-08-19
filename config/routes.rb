@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'users/followings/:id' => 'users#followings', :as => :followings_user
+  get 'users/followers/:id' => 'users#followers', :as => :followers_user
+  get 'users/tweets/:id' => 'users#tweets', :as => :tweets
 
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
