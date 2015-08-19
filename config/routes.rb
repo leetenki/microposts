@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts
+  resources :relationships, :only => [:create, :destroy]
 
   # post 'tweet' => 'microposts#create'
   # get 'tweet' => 'micropost#edit'
