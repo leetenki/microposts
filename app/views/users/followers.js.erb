@@ -1,1 +1,1 @@
-$("#informations").html("<%= escape_javascript(render('users/followers')) %>");
+$("#informations").html("<%= escape_javascript(render(:partial => 'users/followers', :locals => { :follower_users => @follower_users, :page_owner => @user })) %>");

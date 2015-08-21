@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  paginates_per 12
+
   has_many :microposts
   has_many :following_relationships, :class_name => "Relationship", :foreign_key => :follower_id, :dependent => :destroy
   has_many :following_users, :through => :following_relationships, :source => :followed
@@ -18,6 +20,7 @@ class User < ActiveRecord::Base
   validates :profile, :length => { :maximum => 150 }
   validate :check_state_code
   has_secure_password
+
 
   #get time line
   def feed_items

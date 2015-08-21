@@ -1,0 +1,12 @@
+<div class="col-md-4 col-sm-4 col-xs-4 panel">
+  <div id="user-<%= user.id %>" class="user">
+    <%= link_to gravatar_for(user, :size => 50), user, :class => "col-md-4 col-lg-4 col-xs-4" %>        
+    <div class="user_name col-md-8 col-sm-8 col-lg-8"><%= link_to user.name, user %></div>
+      <div class="col-md-8 col-sm-8 col-lg-8">
+        <% if logged_in? %>
+          <%= render :partial => 'follow_form', :locals => { :user => user, :page_owner => page_owner } %>
+        <% end %>
+      </div>
+    <div class="profile col-md-12"><%= user.profile %></div>
+  </div>
+</div>

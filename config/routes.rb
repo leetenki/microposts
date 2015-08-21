@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'users/followings/:id' => 'users#followings', :as => :followings_user
   get 'users/followers/:id' => 'users#followers', :as => :followers_user
   get 'users/tweets/:id' => 'users#tweets', :as => :tweets
+  post 'users/search' => 'users#search'
+  get  'users/search' => 'users#search'
 
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]

@@ -1,0 +1,6 @@
+<h3><%= @total %> users found</h3>
+
+<div class="users">
+  <%= render :partial => 'users/user', :collection => users, :locals => { :page_owner => page_owner } %>
+</div>
+<%= paginate users %>

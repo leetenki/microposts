@@ -164,20 +164,23 @@ aside {
     background-color: #fafafa;
   }
   .gravatar {
-    float: left;
-    margin: 5px;
+    margin: 12%;
     border-radius: 6px;
   }
+  a {
+    padding: 0;
+  }
   .user_name {
-    margin-top: 5em;
-    padding-top: 0;
+    margin-top: 5px;
+    margin-bottom: 3px;
+  }
+  .follow_form {
+    left: 0px;
+    float: left;
+    margin: 0;
+    padding: 0;
   }
   .profile {
-    display: block;
-    position:absolute;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 50px;
   }
 }
 
@@ -228,4 +231,19 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+
+/* navitation */
+nav.pagination {
+  display: none;
+}
+
+/* scrolling image */
+#infscr-loading {
+  position: absolute;
+  text-align:center;
+  margin:0 auto;
+  bottom: 5px;
+  left: 14%;
 }

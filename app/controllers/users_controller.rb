@@ -1,22 +1,27 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, :only => [:edit, :update, :followings, :followers, :tweets]
+  before_action :logged_in_user, :only => [:edit, :update, :followings, :followers, :tweets, :index, :search]
 
   #render following page
   def followings
-    @following_users = User.find(params[:id]).following_users
+    @user = User.find(params[:id])
+    @following_users = @user.following_users
+    @total = @following_users.count
+    @following_users = @following_users.page(params[:page])
   end
 
   #render followers page
   def followers
-    @follower_users = User.find(params[:id]).follower_users
+    @user = User.find(params[:id])
+    @follower_users = @user.follower_users
+    @total = @follower_users.count
+    @follower_users = @follower_users.page(params[:page])
   end
 
   #render tweets page
   def tweets
     @user = User.find(params[:id])
-    @microposts = @user.microposts
+    @microposts = @user.microposts.page(params[:page])
   end
-
 
   #signup page
   def new
@@ -58,7 +63,30 @@ class UsersController < ApplicationController
   #show
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts
+    @microposts = @user.microposts.page(params[:page])
+  end
+
+  #render index page
+  def index
+    @users = User.all
+    @total = @users.count
+    @users = @users.page(params[:page])
+    @user = current_user
+    @search_target = Keyword.new
+  end
+
+  #search method
+  def search
+    @search_target = Keyword.new(:name => params[:keyword][:name])
+    @user = current_user
+    if @search_target.validate
+      @users = User.where("name like ?", "%" + @search_target.name + "%")
+    else
+      @users = User.all
+    end
+    @total = @users.count
+    @users = @users.page(params[:page])
+    render 'index'
   end
 
   #avoid xss

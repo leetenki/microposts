@@ -12,15 +12,21 @@
     <section>
       <%= @user.profile %>
     </section>
+
+    <section>
+      <%= form_for @search_target, :url => '/users/search' do |f| %>
+        <%= render '/shared/error_messages', :object => f.object %>
+
+        <%= f.text_field :name, :class => "form-control", :placeholder => "検索名前を入力してください" %>
+        <%= f.submit "Search Account", :class => "btn btn-large btn-primary" %>
+      <% end %>
+
+    </section>
   </aside>
 
   <div class="col-md-8">
-    <% if logged_in? %>
-      <%= render :partial => 'follow_form', :locals => { :user => @user, :page_owner => @user } %>
-    <% end %>
-
     <div id="informations">  
-      <%= render 'tweets' %>
+      <%= render :partial => 'search_results', :locals => { :users => @users, :page_owner => @user } %>
     </div>
   </div>
 </div>
