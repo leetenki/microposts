@@ -1,4 +1,6 @@
 class Micropost < ActiveRecord::Base
+  mount_uploader :image, ImageUploader
+
   #config
   paginates_per 10
 
@@ -9,7 +11,7 @@ class Micropost < ActiveRecord::Base
   has_many :retweeted_relationships, :class_name => "RetweetRelationship", :foreign_key => "origin_id", :dependent => :destroy
   has_many :retweeted_microposts, :through => :retweeted_relationships, :source => :retweet, :dependent => :destroy
   has_many :retweeted_users, :through => :retweeted_microposts, :source => :user
-  
+
   has_one :origin_relationship, :class_name => "RetweetRelationship", :foreign_key => "retweet_id", :dependent => :destroy
   has_one :origin_tweet, :through => :origin_relationship, :source => :origin
   def retweet(origin_id)

@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'carmen-rails'
 
+gem "mini_magick"
+gem "carrierwave"
 gem "jquery-turbolinks"
 gem 'kaminari'
 gem "font-awesome-rails"

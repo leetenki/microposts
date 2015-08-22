@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822095306) do
+ActiveRecord::Schema.define(version: 20150822174132) do
 
   create_table "favorite_relationships", force: :cascade do |t|
     t.integer  "user_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150822095306) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "micropost_type", default: "tweet"
+    t.string   "image"
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
