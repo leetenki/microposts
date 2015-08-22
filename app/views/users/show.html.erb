@@ -9,7 +9,7 @@
           <%= @user.name %>
         </h1>
         <div>Tweets: <%= link_to @user.microposts.count, tweets_path(@user), id: "tweets", :remote => true %></div>
-        <div>Favorites: <%= link_to @user.favorite_microposts.count, favorites_path(@user), id: "favorites" %></div>
+        <div>Favorites: <%= link_to @user.favorite_microposts.count, favorites_path(@user), id: "favorites", :remote => true %></div>
         <div>Followings: <%= link_to @user.following_users.count, followings_user_path(@user), id: "followings", :remote => true %></div>
         <div>Followers: <%= link_to @user.follower_users.count, followers_user_path(@user), id: "followers", :remote => true %></div>
       </div>

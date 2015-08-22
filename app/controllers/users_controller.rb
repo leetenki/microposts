@@ -32,7 +32,6 @@ class UsersController < ApplicationController
   #signup page
   def new
     @user = User.new
-    session[:user_id] = @user.id
   end
 
   #save to database
@@ -40,7 +39,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "Welcome to the micropost App!"
-      redirect_to user_path(@user)
+      session[:user_id] = @user.id
+      redirect_to users_path
     else
       render 'new'
     end

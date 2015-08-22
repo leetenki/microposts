@@ -32,6 +32,12 @@ a:hover {
   text-decoration: none;
 }
 
+.jumbotron {
+  height: 250px;
+}
+.login-container {
+  margin-top: 30px;
+}
 
 /* typography */
 
@@ -293,11 +299,17 @@ aside {
   .retweet:hover {
     color: #090;
   }
-  .favorite-on, .favorite-off:hover {
+  .favorite-on {
     color: #999;
   }
-  .favorite-on:hover, .favorite-off{
+  .favorite-on:hover {
+    color: #cc0;
+  }
+  .favorite-off {
     color: #fa0;
+  }
+  .favorite-off:hover {
+    color: #fc0;
   }
   .reply {
     color: #999;

@@ -28,7 +28,7 @@
         </div>
         <div class="original-container">
           <%= render :partial => "/microposts/content", :locals => { :micropost => micropost.reply_origin_tweet.origin_tweet } %>
-          <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost.reply_origin_tweet.origin_tweet, :common_id => common_id } %>
+          <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost.reply_origin_tweet, :common_id => common_id } %>
         </div>
       <% else %>
         <div class="original-container">
