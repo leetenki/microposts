@@ -37,13 +37,18 @@ $ ->
 
 
 
+
+initScroll = ->
+  $(".users").infinitescroll('destroy');
+  $(".users").data('infinitescroll', null);
+  $(".microposts").infinitescroll('destroy');
+  $(".microposts").data('infinitescroll', null);
+
+
 $ ->
   $('#tweets')
     .on 'ajax:success', (event, data, status, xhr) ->
-      $(".users").infinitescroll('destroy');
-      $(".users").data('infinitescroll', null);
-      $(".microposts").infinitescroll('destroy');
-      $(".microposts").data('infinitescroll', null);
+      initScroll()
 
       $(".microposts").infinitescroll
         loading: {
@@ -57,14 +62,27 @@ $ ->
     .on 'ajax:error', (event, xhr, status, error) ->
       alert error
 
+$ ->
+  $('#favorites')
+    .on 'ajax:success', (event, data, status, xhr) ->
+      initScroll()
+
+      $(".microposts").infinitescroll
+        loading: {
+          finishedMsg: ""
+          img:     "/ajax_loader_blue_128.gif"
+          msgText: "Now Loading..."
+        }
+        navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
+        nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
+        itemSelector: ".microposts li" # selector for all items you'll retrieve
+    .on 'ajax:error', (event, xhr, status, error) ->
+      alert error
 
 $ ->
   $('#followings')
     .on 'ajax:success', (event, data, status, xhr) ->
-      $(".users").infinitescroll('destroy');
-      $(".users").data('infinitescroll', null);
-      $(".microposts").infinitescroll('destroy');
-      $(".microposts").data('infinitescroll', null);
+      initScroll()
 
       $(".users").infinitescroll
         loading: {
@@ -81,10 +99,7 @@ $ ->
 $ ->
   $('#followers')
     .on 'ajax:success', (event, data, status, xhr) ->
-      $(".users").infinitescroll('destroy');
-      $(".users").data('infinitescroll', null);
-      $(".microposts").infinitescroll('destroy');
-      $(".microposts").data('infinitescroll', null);
+      initScroll()
 
       $(".users").infinitescroll
         loading: {

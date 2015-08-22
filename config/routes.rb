@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   get 'users/tweets/:id' => 'users#tweets', :as => :tweets
   post 'users/search' => 'users#search'
   get  'users/search' => 'users#search'
+  get 'users/microposts/:id' => 'users#favorites', :as => :favorites
+
+  post 'microposts/retweet' => 'microposts#retweet', :as => :retweet
+  post 'microposts/reply' => 'microposts#reply', :as => :reply
+  post 'microposts/favorite' => 'microposts#favorite', :as => :favorite
 
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]

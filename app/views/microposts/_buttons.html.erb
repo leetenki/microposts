@@ -1,0 +1,42 @@
+<div class="row col-md-12">
+  <!-- reply button -->
+  <span class="col-md-1 col-md-offset-1">
+    <%= fa_icon "reply 1x", :class => "reply", :onclick => "display('reply-form-" + micropost.id.to_s + "', 'bottom-form-" + common_id.to_s + "')" %>
+  </span>
+
+  <!-- retweet button -->
+  <span class="col-md-1">
+    <% if((current_user==micropost.user) || (micropost.has_origin? && micropost.origin_tweet.user==current_user) || (current_user.id.in? micropost.retweeted_user_ids)) %>
+      <%= fa_icon "retweet 1x", :class => "inactive" %>
+    <% else %>
+      <%= render :partial => "/microposts/retweet_form", :locals => { :micropost => micropost, :current_user => current_user } %>
+    <% end %>
+  </span>
+
+  <!-- favorite button -->
+  <span class="col-md-1" id="favorite-<%= micropost.id %>">
+    <%= render :partial => "/microposts/favorite_link", :locals => { :micropost => micropost } %>
+  </span>
+
+  <!-- delete button -->
+  <span class="col-md-1">
+    <% if current_user == micropost.user %>
+      <%= link_to fa_icon("trash 1x"), micropost, :method => :delete, :data => { :confirm => "Are you sure to delete?" }, :class => "delete" %>
+    <% else %>
+      <%= fa_icon("trash-o 1x", :class => "inactive") %>
+    <% end %>
+  </span>
+
+  <!-- reply form -->
+  <div class="reply-form col-md-12" id="reply-form-<%= micropost.id %>">
+    <%= form_for(Micropost.new, :url => reply_path) do |f| %>
+      <div class="row">
+        <%= f.text_area :content, :value => "@" + micropost.user.name + " ", :rows => 5, :class => "col-md-10 col-md-offset-1 col-md-offset-right-1" %>
+        <input id="page_set" name="origin_id" type="hidden" value="<%= micropost.id %>" />
+      </div>
+      <div class="row">
+        <%= f.submit "Reply", :class => "btn btn-primary default col-md-2 col-md-offset-9" %>
+      </div>
+    <% end %>
+  </div>
+</div>

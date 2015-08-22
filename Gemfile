@@ -31,6 +31,7 @@ gem 'carmen-rails'
 
 gem "jquery-turbolinks"
 gem 'kaminari'
+gem "font-awesome-rails"
 
 # Use Unicorn as the app server
 # gem 'unicorn'

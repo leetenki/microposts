@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820080811) do
+ActiveRecord::Schema.define(version: 20150822095306) do
+
+  create_table "favorite_relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "micropost_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "favorite_relationships", ["micropost_id", "user_id"], name: "index_favorite_relationships_on_micropost_id_and_user_id", unique: true
+  add_index "favorite_relationships", ["micropost_id"], name: "index_favorite_relationships_on_micropost_id"
+  add_index "favorite_relationships", ["user_id", "micropost_id"], name: "index_favorite_relationships_on_user_id_and_micropost_id", unique: true
+  add_index "favorite_relationships", ["user_id"], name: "index_favorite_relationships_on_user_id"
 
   create_table "keywords", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150820080811) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "micropost_type", default: "tweet"
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
@@ -39,6 +52,28 @@ ActiveRecord::Schema.define(version: 20150820080811) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "reply_relationships", force: :cascade do |t|
+    t.integer  "origin_id"
+    t.integer  "reply_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reply_relationships", ["origin_id", "reply_id"], name: "index_reply_relationships_on_origin_id_and_reply_id", unique: true
+  add_index "reply_relationships", ["origin_id"], name: "index_reply_relationships_on_origin_id"
+  add_index "reply_relationships", ["reply_id"], name: "index_reply_relationships_on_reply_id"
+
+  create_table "retweet_relationships", force: :cascade do |t|
+    t.integer  "origin_id"
+    t.integer  "retweet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "retweet_relationships", ["origin_id", "retweet_id"], name: "index_retweet_relationships_on_origin_id_and_retweet_id", unique: true
+  add_index "retweet_relationships", ["origin_id"], name: "index_retweet_relationships_on_origin_id"
+  add_index "retweet_relationships", ["retweet_id"], name: "index_retweet_relationships_on_retweet_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

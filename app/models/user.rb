@@ -2,6 +2,11 @@ class User < ActiveRecord::Base
   paginates_per 12
 
   has_many :microposts
+
+  #favorite relationships
+  has_many :favorite_relationships, :dependent => :destroy
+  has_many :favorite_microposts, :through => :favorite_relationships, :source => :micropost
+
   has_many :following_relationships, :class_name => "Relationship", :foreign_key => :follower_id, :dependent => :destroy
   has_many :following_users, :through => :following_relationships, :source => :followed
   has_many :follower_relationships, :class_name => "Relationship", :foreign_key => :followed_id, :dependent => :destroy

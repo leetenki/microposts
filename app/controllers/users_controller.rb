@@ -17,6 +17,12 @@ class UsersController < ApplicationController
     @follower_users = @follower_users.page(params[:page])
   end
 
+  #favorites
+  def favorites
+    @user = User.find(params[:id])
+    @microposts = @user.favorite_microposts.page(params[:page])
+  end
+
   #render tweets page
   def tweets
     @user = User.find(params[:id])
@@ -63,7 +69,7 @@ class UsersController < ApplicationController
   #show
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.page(params[:page])
+    @microposts = @user.microposts.order(:created_at => :desc).page(params[:page])
   end
 
   #render index page

@@ -1,0 +1,41 @@
+<% id = micropost.id.to_s %>
+<% if micropost.micropost_type == "retweet" %>
+  <% origin_id = micropost.origin_tweet.id %>
+<% else %>
+  <% origin_id = micropost.id %>
+<% end %>
+
+<%= link_to fa_icon("retweet 1x"), 
+    micropost,
+    :rel => "", :href => "", :data => { :toggle => "modal", :target => ("#retweet_form_"+id), :micropost_data => micropost}, :class => "retweet" 
+%>
+
+<div class="modal fade" id="retweet_form_<%= id %>" class="retweet_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Retweet this micropost</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for(Micropost.new, :url => retweet_path) do |f| %>
+          <div class="form-group">
+            <label for="comment-text" class="control-label"><i class="fa fa-commenting-o"></i>　Comment:</label>
+            <input id="page_set" name="origin_id" type="hidden" value=<%= origin_id %> />
+            <%= f.text_field :content, :placeholder => "Add some comments", :class =>"form-control comment-text" %>
+          </div>
+
+          <div class="user-content-view-only">
+            <%= render :partial => "/microposts/content", :locals => { :micropost => micropost} %>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit "Retweet", :class => "btn btn-primary default", :onclick => "sendRetweet('retweet_form_" + id + "')" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

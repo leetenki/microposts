@@ -1,11 +1,50 @@
-<li id="micropost-<%= micropost.id %>">
-	<%= link_to gravatar_for(micropost.user, :size => 50), micropost.user %>
-	<span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-	<span class="content"><%= micropost.content %></span>
-	<span class="timestamp">
-		Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-		<% if current_user == micropost.user %>
-			<%= link_to "delete", micropost, :method => :delete, :data => { :confirm => "Are you sure to delete?" } %>
-		<% end %>
-	</span>
+<% common_id = micropost.id %>
+
+<li id="micropost-<%= common_id %>" class="col-md-12">
+  <!-- user content -->
+  <div class="user-content content-top col-md-12">
+    <% if micropost.micropost_type == "tweet" %>
+      <div class="original-container">
+        <%= render :partial => "/microposts/content", :locals => { :micropost => micropost } %>
+        <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost, :common_id => common_id } %>
+      </div>
+
+    <!-- retweet -->
+    <% elsif micropost.micropost_type == "retweet" %>
+      <div class="retweet-container">
+        <%= render :partial => "/microposts/retweet_content", :locals => { :micropost => micropost } %>
+      </div>
+      <div class="original-container">
+        <%= render :partial => "/microposts/content", :locals => { :micropost => micropost.origin_tweet } %>
+        <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost, :common_id => common_id } %>
+      </div>
+
+    <!-- reply -->
+    <% elsif micropost.micropost_type == "reply" && micropost.has_reply_origin? %>
+      <!-- origin -->
+      <% if micropost.reply_origin_tweet.micropost_type == "retweet" %>
+        <div class="retweet-container">
+          <%= render :partial => "/microposts/retweet_content", :locals => { :micropost => micropost.reply_origin_tweet } %>
+        </div>
+        <div class="original-container">
+          <%= render :partial => "/microposts/content", :locals => { :micropost => micropost.reply_origin_tweet.origin_tweet } %>
+          <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost.reply_origin_tweet.origin_tweet, :common_id => common_id } %>
+        </div>
+      <% else %>
+        <div class="original-container">
+          <%= render :partial => "/microposts/content", :locals => { :micropost => micropost.reply_origin_tweet } %>
+          <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost.reply_origin_tweet, :common_id => common_id } %>
+        </div>
+      <% end %>
+      <!-- comment -->
+      <% micropost.reply_origin_tweet.replied_microposts.each do |reply| %>
+        <div class="reply-container">
+          <%= render :partial => "/microposts/reply_content", :locals => { :micropost => reply } %>
+          <%= render :partial => "/microposts/buttons", :locals => { :micropost => reply, :common_id => common_id  } %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="bottom-form-<%= common_id %>"  class="reply-form col-md-12" >
+  </div>
 </li>

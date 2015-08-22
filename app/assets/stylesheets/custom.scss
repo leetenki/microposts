@@ -5,6 +5,7 @@
 
 body {
   padding-top: 60px;
+  background-color: #fafafa;
 }
 
 section {
@@ -22,6 +23,15 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+a, a:active, a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 
 /* typography */
 
@@ -78,7 +88,7 @@ $gray-medium-light: #eaeaea;
 }
 
 /* forms */
-input, textarea, select, .uneditable-input {
+input:not(.default), textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
@@ -148,6 +158,7 @@ aside {
 .users {
   padding: 0;
   .panel {
+    background-color: #fafafa;
     padding: 5px;
     margin: 0;
     border: none;
@@ -161,7 +172,7 @@ aside {
     border-radius: 10px;
     height: 240px;
     overflow: hidden;
-    background-color: #fafafa;
+    background-color: #ffffff;
   }
   .gravatar {
     margin: 12%;
@@ -192,16 +203,50 @@ aside {
   list-style: none;
   padding: 0;
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    margin-top: 9px;
+    padding: 0px;
+    background-color: #ffffff;
+  }
+  .retweet-container {
+    width: 100%;
+    min-height: 38px;
+    padding-bottom: 5px;
+  }
+  .original-container {
+    min-height: 80px;
+  }
+  .reply-container {
+    width: 100%;
+    min-height: 80px;
+    border-top: 1px solid #e0e0e0;    
+    padding-top: 5px;
+  }
+  .user-content {
+/*   border-bottom: 1px solid #e0e0e0;   */
+    padding: 5px;
+  }
+  .user-content-view-only {
+    padding: 0px 5px 5px 5px;
+  }
+  .content-top {
+    border-radius: 10px 10px 0px 0px;
+  }
+  .user-content:hover {
+    background-color: #eeeef7;
   }
   .user {
-    margin-top: 5em;
-    padding-top: 0;
+    display: block;
+    display: block;
+    margin-left: 60px;
+    position: relative;
   }
   .content {
     display: block;
     margin-left: 60px;
+    word-break: break-all;    
+    position: relative;
     img {
       display: block;
       padding: 5px 0;
@@ -215,7 +260,46 @@ aside {
   .gravatar {
     float: left;
     margin-right: 10px;
-    margin-top: 5px;
+    border-radius: 8px;
+  }
+  .reply-form {
+    border-top: 1px solid #e0e0e0;
+    background-color: #f4f4f4;
+    border-radius: 0px 0px 10px 10px;
+    padding: 25px 0px;
+    display: none;
+  }
+  .retweet-content {
+    font-size: 12px;
+    color: #cccccc;
+    margin-left: 40px;
+  }
+  .inactive {
+    color: #ccc;
+  }
+  .delete {
+    color: #999;
+  }
+  .delete:hover {
+    color: #a00;
+  }
+  .retweet {
+    color: #999;
+  }
+  .retweet:hover {
+    color: #090;
+  }
+  .favorite-on, .favorite-off:hover {
+    color: #999;
+  }
+  .favorite-on:hover, .favorite-off{
+    color: #fa0;
+  }
+  .reply {
+    color: #999;
+  }
+  .reply:hover {
+    color: #07f;
   }
 }
 

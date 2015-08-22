@@ -1,0 +1,3 @@
+<%= link_to gravatar_for(micropost.user, :size => 34), micropost.user %>
+<span class="retweet-content user"><%= link_to micropost.user.name, micropost.user %> Retweeted <%= time_ago_in_words(micropost.created_at) %> ago.</span>
+<span class="retweet-content content"><%= micropost.content %></span>
