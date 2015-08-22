@@ -9,10 +9,3 @@ function display(html_id, bottom_form_id) {
   bottom_form.style.display = "block"
 }
 
-debug = null;
-window.onload = function() {
-  var informations = document.getElementById("informations");
-  console.log(informations);
-  debug = informations
-  alert(debug);
-}
