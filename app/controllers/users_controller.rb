@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @following_users = @user.following_users
     @total = @following_users.count
-    @following_users = @following_users.page(params[:page])
+    @following_users = @following_users.order(:created_at => :desc).page(params[:page])
   end
 
   #render followers page
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @follower_users = @user.follower_users
     @total = @follower_users.count
-    @follower_users = @follower_users.page(params[:page])
+    @follower_users = @follower_users.order(:created_at => :desc).page(params[:page])
   end
 
   #favorites
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @total = @users.count
-    @users = @users.page(params[:page])
+    @users = @users.order(:created_at => :desc).page(params[:page])
     @user = current_user
     @search_target = Keyword.new
   end
