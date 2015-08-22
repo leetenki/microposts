@@ -32,6 +32,7 @@ class UsersController < ApplicationController
   #signup page
   def new
     @user = User.new
+    session[:user_id] = @user.id
   end
 
   #save to database

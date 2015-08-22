@@ -14,7 +14,7 @@
         <div>Followers: <%= link_to @user.follower_users.count, followers_user_path(@user), id: "followers", :remote => true %></div>
       </div>
     </section>
-    <section>
+    <section class="profile">
       <%= @user.profile %>
     </section>
 

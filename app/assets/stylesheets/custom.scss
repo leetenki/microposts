@@ -142,6 +142,9 @@ aside {
       margin-top: 0px;
     }
   }
+  .profile {
+    word-break: break-all;   
+  }
 }
 
 .gravatar {
@@ -192,6 +195,7 @@ aside {
     padding: 0;
   }
   .profile {
+    word-break: break-all; 
   }
 }
 
