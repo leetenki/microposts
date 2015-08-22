@@ -21,7 +21,7 @@ end
     :email => random_string(Random.rand(10)+20) + '@' + random_string(5) + '.' + random_string(3),
     :country_code => 'JP',
     :state_code => '13',
-    :password => random_string(10)
+    :password => random_string(10),
     :profile => random_string(100)
   )
 end
