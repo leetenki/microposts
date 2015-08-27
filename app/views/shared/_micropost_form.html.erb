@@ -3,6 +3,16 @@
 	<div class="field">
 		<%= f.text_area :content, :placeholder => "Compose new micropost..." %>
 	</div>
-  <%= f.file_field :image %>  
+
+  <div class="input-group">
+    <span class="input-group-btn">
+      <span class="btn btn-primary btn-file">
+        File Uploader
+        <%= f.file_field :image %>  
+      </span>
+    </span>
+    <input type="text" id="file_uploader" class="form-control" readonly>
+  </div>
+
 	<%= f.submit "Post", :class => "btn btn-primary" %>
 <% end %>

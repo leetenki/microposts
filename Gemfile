@@ -34,6 +34,7 @@ gem 'carmen-rails'
 
 gem "mini_magick"
 gem "carrierwave"
+gem "rmagick", require: "RMagick"
 gem "jquery-turbolinks"
 gem 'kaminari'
 gem "font-awesome-rails"

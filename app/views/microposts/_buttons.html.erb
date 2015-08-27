@@ -32,7 +32,12 @@
     <%= form_for(Micropost.new, :url => reply_path) do |f| %>
       <div class="row">
         <%= f.text_area :content, :value => "@" + micropost.user.name + " ", :rows => 5, :class => "col-md-10 col-md-offset-1 col-md-offset-right-1" %>
-        <input id="page_set" name="origin_id" type="hidden" value="<%= micropost.id %>" />
+
+        <% original_micropost = micropost %>
+        <% while(original_micropost.micropost_type == "reply") %>
+        <%   original_micropost = original_micropost.reply_origin_tweet %>
+        <% end %>
+        <input name="origin_id" type="hidden" value="<%= original_micropost.id %>" />
       </div>
       <div class="row">
         <%= f.submit "Reply", :class => "btn btn-primary default col-md-2 col-md-offset-9" %>
