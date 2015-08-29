@@ -14,8 +14,8 @@
   </span>
 
   <!-- favorite button -->
-  <span class="col-md-1" id="favorite-<%= micropost.id %>">
-    <%= render :partial => "/microposts/favorite_link", :locals => { :micropost => micropost } %>
+  <span class="col-md-1 <%= micropost.id %>" id="favorite-<%= micropost.id %>">
+    <%= render :partial => "/microposts/favorite_link", :locals => { :micropost => micropost} %>
   </span>
 
   <!-- delete button -->

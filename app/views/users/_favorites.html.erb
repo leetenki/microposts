@@ -1,7 +1,10 @@
 <h3>Favorite Microposts (<%= @user.favorite_microposts.count %>)</h3>
 <% if @user.favorite_microposts.any? %>
-	<ol class="microposts">
-		<%= render @microposts %>
-	</ol>
-  <%= paginate @microposts, :remote => true %>
+  <ol class="microposts">
+    <% tweet_ids = [] %>
+    <% @microposts.each do |micropost| %>
+      <%= render :partial => "/microposts/micropost", :locals => { :micropost => micropost, :tweet_ids => tweet_ids } %>
+    <% end %>
+  </ol>
+  <%= paginate @microposts %>
 <% end %>

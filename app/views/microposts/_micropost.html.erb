@@ -1,13 +1,25 @@
 <% common_id = micropost.id %>
 
 <li id="micropost-<%= common_id %>" class="col-md-12">
-  <!-- user content -->
   <div class="user-content content-top col-md-12">
+
+    <!-- tweet -->
     <% if micropost.micropost_type == "tweet" %>
       <div class="original-container container">
         <%= render :partial => "/microposts/content", :locals => { :micropost => micropost } %>
         <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost, :common_id => common_id } %>
       </div>
+
+      <% micropost.replied_microposts.each do |reply| %>
+        <div class="reply-container container">
+          <%= render :partial => "/microposts/reply_content", :locals => { :micropost => reply } %>
+          <%= render :partial => "/microposts/buttons", :locals => { :micropost => reply, :common_id => common_id  } %>
+        </div>
+      <% end %>
+
+      <% tweet_ids.push(micropost.id) %>
+
+
 
     <!-- retweet -->
     <% elsif micropost.micropost_type == "retweet" %>
@@ -19,8 +31,20 @@
         <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost, :common_id => common_id } %>
       </div>
 
+      <% micropost.replied_microposts.each do |reply| %>
+        <div class="reply-container container">
+          <%= render :partial => "/microposts/reply_content", :locals => { :micropost => reply } %>
+          <%= render :partial => "/microposts/buttons", :locals => { :micropost => reply, :common_id => common_id  } %>
+        </div>
+      <% end %>
+
+      <% tweet_ids.push(micropost.id) %>
+
+
+
     <!-- reply -->
     <% elsif micropost.micropost_type == "reply" && micropost.has_reply_origin? %>
+      <% tweet_ids.push(micropost.reply_origin_tweet.id) %>
       <!-- origin -->
       <% if micropost.reply_origin_tweet.micropost_type == "retweet" %>
         <div class="retweet-container container">
@@ -36,6 +60,7 @@
           <%= render :partial => "/microposts/buttons", :locals => { :micropost => micropost.reply_origin_tweet, :common_id => common_id } %>
         </div>
       <% end %>
+
       <!-- comment -->
       <% micropost.reply_origin_tweet.replied_microposts.each do |reply| %>
         <div class="reply-container container">
@@ -43,6 +68,9 @@
           <%= render :partial => "/microposts/buttons", :locals => { :micropost => reply, :common_id => common_id  } %>
         </div>
       <% end %>
+
+      <% tweet_ids.push(micropost.reply_origin_tweet.id) %>
+
     <% end %>
   </div>
   <div id="bottom-form-<%= common_id %>"  class="reply-form col-md-12" >

@@ -20,13 +20,13 @@ class UsersController < ApplicationController
   #favorites
   def favorites
     @user = User.find(params[:id])
-    @microposts = @user.favorite_microposts.page(params[:page])
+    @microposts = @user.favorite_microposts.order(:created_at => :desc).page(params[:page])
   end
 
   #render tweets page
   def tweets
     @user = User.find(params[:id])
-    @microposts = @user.microposts.page(params[:page])
+    @microposts = @user.microposts.order(:created_at => :desc).page(params[:page])
   end
 
   #signup page
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
       @users = User.all
     end
     @total = @users.count
-    @users = @users.page(params[:page])
+    @users = @users.order(:created_at => :desc).page(params[:page])
     render 'index'
   end
 

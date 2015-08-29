@@ -1,6 +1,10 @@
 <% if @feed_items.any? %>
   <ol class="microposts">
-    <%= render @feed_items %>
+    <% tweet_ids = [] %>
+    <% @feed_items.each do |feed_item| %>
+      <%= render :partial => "/microposts/micropost", :locals => { :micropost => feed_item, :tweet_ids => tweet_ids } %>
+    <% end %>
+
   </ol>
   <%= paginate @feed_items %>  
 <% end %>

@@ -5,5 +5,5 @@
   Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 </span>
 <% if !micropost.image_url.nil? %>
-  <span><%= image_tag micropost.image_url(:thumb) %></span>
+  <span class="col-md-12 row"><%= image_tag micropost.image_url(:thumb) %></span>
 <% end %>
